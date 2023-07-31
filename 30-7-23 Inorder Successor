@@ -1,0 +1,35 @@
+ Node * inOrderSuccessor(Node *root, Node *x)
+    {
+        //Your code here
+        if(x->right)
+        {
+            Node* temp=x->right;
+            while(temp->left!=NULL) temp=temp->left;
+            return temp;
+        }
+        queue<Node*>q;
+        map<Node*,Node*>parent;
+        q.push(root);
+        while(!q.empty())
+        {
+            auto t=q.front();
+            q.pop();
+            if(t->left)
+            {
+                parent[t->left]=t;
+                q.push(t->left);
+            }
+            if(t->right)
+            {
+                parent[t->right]=t;
+                q.push(t->right);
+            }
+            
+        }
+        while(parent.find(x)!=parent.end() && parent[x]->right==x) x=parent[x];
+        // if(parent.find(x)==parent.end()) return NULL;
+        if(parent.find(x)==parent.end()) return NULL;
+        if(parent[x]->left==x) return parent[x];
+        return NULL;
+        
+    }
