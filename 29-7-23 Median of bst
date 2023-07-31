@@ -1,0 +1,36 @@
+void ino(struct Node*root,vector<int>&v)
+{
+    if(root)
+    {
+        ino(root->left,v);
+        v.push_back(root->data);
+        ino(root->right,v);
+    }
+}
+float findMedian(struct Node *root)
+{
+      //Code here
+      int n=0;
+      queue<Node*>q;
+      q.push(root);
+      while(!q.empty())
+      {
+          n++;
+          auto t=q.front();
+          q.pop();
+          if(t->left) q.push(t->left);
+          if(t->right) q.push(t->right);
+      }
+      vector<int>v;
+      ino(root,v);
+      if(n%2==0)
+      {
+          n/=2;
+        //   cout<<v[n-1]<<endl;
+          float ans=v[n-1]+v[n];
+          ans/=2.0;
+          return ans;
+          
+      }
+      return v[n/2];
+}
