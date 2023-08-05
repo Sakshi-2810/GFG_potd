@@ -1,0 +1,38 @@
+/*
+The structure of linked list is the following
+
+struct Node {
+  int data;
+  struct Node *next;
+  Node(int x) {
+    data = x;
+    next = NULL;
+  }
+};
+*/
+
+
+class Solution
+{
+    public:
+    //Function to remove duplicates from unsorted linked list.
+    Node * removeDuplicates( Node *head) 
+    {
+     // your code goes here
+     set<int>s;
+     Node* ans=new Node(-1);
+     Node* ret=ans;
+     while(head!=NULL)
+     {
+         if(s.find(head->data)==s.end())
+         {
+             s.insert(head->data);
+             Node* t=new Node(head->data);
+             ans->next=t;
+             ans=t;
+         }
+         head=head->next;
+     }
+     return ret->next;
+    }
+};
