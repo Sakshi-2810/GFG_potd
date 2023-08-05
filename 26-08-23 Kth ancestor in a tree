@@ -1,0 +1,37 @@
+
+
+//User function Template for C++
+/*
+Structure of the node of the binary tree is as
+struct Node
+{
+	int data;
+	struct Node *left, *right;
+};
+*/
+// your task is to complete this function
+int solve(Node *root, int k, int node,int & ans)
+{
+    if(root==NULL) return -1;
+    if(node==root->data)
+    {
+        return k-1;
+    }
+    int left=solve(root->left,k,node,ans);
+    int right=solve(root->right,k,node,ans);
+    if(left==0 || right==0) 
+    {
+        ans=root->data;
+        return -1;
+    }
+    if(left>0 || right>0) return max(left,right)-1;
+    return -1;
+}
+
+int kthAncestor(Node *root, int k, int node)
+{
+    // Code here
+    int ans=-1;
+    int r=solve(root,k,node,ans);
+    return ans;
+}
