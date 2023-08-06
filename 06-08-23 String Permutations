@@ -1,0 +1,26 @@
+void solve(string S,string ans,int c,vector<string>& v,map<int,int>&m)
+    {
+        if(c==S.length()) 
+        {
+            v.push_back(ans);
+            return ;
+        }
+        for(int i=0;i<S.length();i++)
+        {
+            if(m[i]==0)
+            {
+                m[i]=1;
+                solve(S,ans+S[i],c+1,v,m);
+                m[i]=0;
+            }
+        }
+    }
+    vector<string> permutation(string S)
+    {
+        //Your code here
+        vector<string> v;
+        map<int,int> m;
+        solve(S,"",0,v,m);
+        sort(v.begin(),v.end());
+        return v;
+    }
