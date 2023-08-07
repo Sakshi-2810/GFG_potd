@@ -1,0 +1,62 @@
+ bool check(int grid[N][N],int g,int num)
+    {
+        int row=g/N,col=g%N;
+        for(int i=0;i<N;i++)
+        {
+            if(grid[row][i]==num ) return false;
+        }
+        for(int i=0;i<N;i++)
+        {
+            if(grid[i][col]==num ) return false;
+        }
+        int st_r=row/3,st_c=col/3,en_r=(row+3)/3,en_c=(col+3)/3;
+        st_r*=3;
+        st_c*=3;
+        en_r*=3;
+        en_c*=3;
+        for(int i=st_r;i<en_r;i++)
+        {
+            for(int j=st_c;j<en_c;j++) if(grid[i][j]==num) return false;
+        }
+        return true;
+        
+    }
+    
+    bool solve(int grid[N][N],int g)
+    {
+        if(g==N*N) return true;
+        for(int i=g;i<N*N;i++)
+        {
+            if(grid[i/N][i%N]!=0) continue;
+            for(int j=1;j<10;j++)
+            {
+                if(check(grid,i,j))
+                {
+                    grid[i/N][i%N]=j;
+                    if(solve(grid,i+1)) return true;
+                    else grid[i/N][i%N]=0;
+                }
+            }
+            if(grid[i/N][i%N]==0) return false;
+        }
+        return true;
+    }
+    
+    bool SolveSudoku(int grid[N][N])  
+    { 
+        // Your code here
+        bool ans= solve(grid,0);
+        return ans;
+        
+    }
+    
+    //Function to print grids of the Sudoku.
+    void printGrid (int grid[N][N]) 
+    {
+        // Your code here 
+        for(int i=0;i<N;i++)
+        {
+            for(int j=0;j<N;j++) cout<<grid[i][j]<<" ";
+            // cout<<endl;
+        }
+    }
