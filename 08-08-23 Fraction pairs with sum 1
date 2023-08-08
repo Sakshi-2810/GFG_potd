@@ -1,0 +1,25 @@
+int countFractions(int n, int num[], int den[])
+    {
+        map<int,vector<int>> m;
+        for(int i=0;i<n;i++)
+        {
+            int g=__gcd(num[i],den[i]);
+            num[i]/=g;
+            den[i]/=g;
+            vector<int>v=m[den[i]];
+            v.push_back(num[i]);
+            m[den[i]]=v;
+        }
+        int ans=0;
+        for(auto i:m)
+        {
+            int sum=i.first;
+            map<int,int>s;
+            for(auto j:i.second)
+            {
+                if(s.find(sum-j)!=s.end() || j==sum) ans+=s[sum-j];
+                s[j]++;
+            }
+        }
+        return ans;
+    }
