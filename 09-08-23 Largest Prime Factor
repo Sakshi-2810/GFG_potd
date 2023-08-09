@@ -1,0 +1,12 @@
+long long int largestPrimeFactor(int N){
+        long long int ans=-1;
+        for(int i=2;i*i<=N;i++)
+        {
+            while(N%i==0) {
+                ans=i;
+                N/=i;
+            }
+        }
+        if(N>1) ans=N;
+        return ans;
+    }
