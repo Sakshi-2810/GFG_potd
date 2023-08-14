@@ -1,0 +1,33 @@
+class Solution
+{
+public:
+    vector<int> singleNumber(vector<int> nums) 
+    {
+        vector<int> v(2,0);
+            vector<int> l,r;
+            int n=nums.size();
+            int xrr=0;
+            for(int i=0;i<n;i++) xrr^=nums[i];
+            int ind;
+            for(int i=0;i<31;i++)
+            {
+                if((xrr>>i)&1)
+                {
+                    ind=i;
+                    break;
+                }
+            }
+            for(int i=0;i<n;i++)
+            {
+              if((nums[i]>>ind)&1) l.push_back(nums[i]);
+              else r.push_back(nums[i]);
+
+            }
+            int a=0,b=0;
+            for(auto it: l) a^=it;
+            for(auto it: r) b^=it;
+            v[0]=min(a,b);
+            v[1]=max(a,b);
+            return v;
+    }
+};
