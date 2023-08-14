@@ -1,0 +1,34 @@
+class Solution {
+	public:
+		string FirstNonRepeating(string A){
+		    // Code here
+		    vector<pair<int,int>>f(26);
+		    string ans;
+		    ans+=A[0];
+		    char prev=A[0];
+		    f[A[0]-'a']={1,0};
+		    for(int i=1;i<A.length();i++)
+		    {
+		        f[A[i]-'a']={ f[A[i]-'a'].first+1, i};
+		        if(f[prev-'a'].first==1) ans+=prev;
+		        else
+		        {
+		          //  bool flag=true;
+		            int min=A.length();
+		            for(int i=0;i<26;i++)
+		            {
+		                if(f[i].first==1 && min>f[i].second) min=f[i].second;
+		            }
+		            if(min==A.length()) ans+='#';
+		            else 
+		            {
+		                ans+=A[min];
+		                prev=A[min];
+		            }
+		        }
+		    }
+		  //  for(int i=0;i<26;i++) cout<<"i= "<<i<<" freq="<<f[i].first<<endl;
+		    return ans;
+		}
+
+};
