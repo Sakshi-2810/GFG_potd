@@ -1,0 +1,41 @@
+class Solution
+{
+    public:
+    /*You are required to complete this method*/
+    int findK(int a[MAX][MAX],int n,int m,int k)
+    {
+ 		// Your code goes here.
+ 		int l=0,b=n-1,t=0,r=m-1;
+ 		while(k>0)
+ 		{
+ 		    for(int j=l;j<=r;j++)
+ 		    {
+     		    k--;
+     		 //   cout<<"j "<<j<<" r"<<r<<endl;
+     		    if(k==0) return a[t][j];
+ 		    }
+ 		    for(int j=t+1;j<=b;j++)
+ 		    {
+ 		        k--;
+ 		        if(k==0) return a[j][r];
+ 		    }
+ 		    for(int j=r-1;j>=l;j--)
+ 		    {
+ 		        k--;
+ 		        if(k==0) return a[b][j];
+ 		    }
+ 		    for(int j=b-1;j>t;j--)
+ 		    {
+ 		        k--;
+ 		        if(k==0) return a[j][l];
+ 		    }
+ 		    t++;
+ 		    b--;
+ 		    l++;
+ 		    r--;
+ 		}
+ 		return -1;
+    }
+};
+
+
