@@ -1,0 +1,16 @@
+
+class Solution{
+    public:
+    //You need to complete this fucntion
+    long long int mod=1e9+7;
+    long long power(long long int N,long long int R)
+    {
+       //Your code here
+       if(R==1) return 1LL*(N%mod);
+       long long int ans=power((N*N)%mod,R/2)%mod;
+       if(R%2==1) ans=(ans*N)%mod;
+       return ans;
+        
+    }
+
+};
