@@ -1,0 +1,22 @@
+ if(start==end)  return 0;
+        
+        int mod =100000;
+        priority_queue<pair<int,int>> q;
+        vector<int> prod(mod,INT_MAX);
+        q.push({0,start});
+        prod[start] = 0;
+        while(!q.empty()){
+            int steps = -q.top().first,node = q.top().second;
+            q.pop();
+            
+            for(auto nnode:arr){
+                int mult = (node*nnode)%mod;
+                if(prod[mult]!=INT_MAX) continue;
+                
+                prod[mult] = steps+1;
+                if(mult==end) return steps+1;
+                q.push({-steps-1,mult});
+            }
+            
+        }
+        return -1;
