@@ -1,0 +1,29 @@
+ void inorder(Node *root,vector<int> a,int&i)
+   {
+       if(root==NULL) return;
+       inorder(root->left,a,i);
+       root->data=a[i];
+       i++;
+       inorder(root->right,a,i);
+   }
+    Node *binaryTreeToBST (Node *root)
+    {
+        //Your code goes here
+        vector<int> a;
+        queue<Node*> q;
+        q.push(root);
+        while(!q.empty())
+        {
+            Node* temp=q.front();
+            q.pop();
+            a.push_back(temp->data);
+            // cout<<"temp->data = "<<temp->data<<endl;
+            if(temp->left!=NULL) q.push(temp->left);
+            if(temp->right!=NULL) q.push(temp->right);
+        }
+        sort(a.begin(),a.end());
+        int i=0;
+        inorder(root,a,i);
+        
+        return root;
+    }
