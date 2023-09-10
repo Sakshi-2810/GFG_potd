@@ -1,0 +1,15 @@
+ if(root != NULL){
+                if(data < root->data){
+                    if(root->left == NULL)
+                        root->left = new Node(data);
+                    else
+                        insert(root->left, data);
+                }
+                else if(data > root->data){
+                    if(root->right == NULL)
+                        root->right = new Node(data);
+                    else
+                        insert(root->right, data); 
+                }
+            }
+            return root;
