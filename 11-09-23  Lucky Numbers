@@ -1,0 +1,21 @@
+  bool check( int n , int div)
+    {
+        if( div > n)
+        {
+            return true;
+        }
+        
+        if( n % div == 0)
+        {
+            return false;
+        }
+        else
+        {
+            return check(n-(n/div) , div + 1);
+        }
+    }
+    
+    bool isLucky(int n) {
+        
+        return check(n , 2);
+    }
